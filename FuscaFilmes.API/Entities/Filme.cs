@@ -8,5 +8,6 @@ public class Filme
   public required string Titulo { get; set; }
   public int Ano { get; set; }
 
-  public Diretor? Diretor { get; set; }
+  public int DiretorId { get; set; }
+  public required Diretor Diretor { get; set; }
 }
