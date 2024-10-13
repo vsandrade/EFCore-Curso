@@ -1,7 +1,4 @@
-using System;
-
-namespace FuscaFilmes.API.Entities;
-
+namespace FuscaFilmes.Domain.Entities;
 public class Diretor
 {
   public int Id { get; set;}

@@ -7,19 +7,19 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace FuscaFilmes.API.Migrations
+namespace FuscaFilmes.Repo.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20241009171733_AdicionarDadosIniciais")]
-    partial class AdicionarDadosIniciais
+    [Migration("20241013045129_InitialCreation")]
+    partial class InitialCreation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.8");
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.10");
 
-            modelBuilder.Entity("FuscaFilmes.API.Entities.Diretor", b =>
+            modelBuilder.Entity("FuscaFilmes.Domain.Entities.Diretor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -66,7 +66,7 @@ namespace FuscaFilmes.API.Migrations
                         });
                 });
 
-            modelBuilder.Entity("FuscaFilmes.API.Entities.Filme", b =>
+            modelBuilder.Entity("FuscaFilmes.Domain.Entities.Filme", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -217,9 +217,9 @@ namespace FuscaFilmes.API.Migrations
                         });
                 });
 
-            modelBuilder.Entity("FuscaFilmes.API.Entities.Filme", b =>
+            modelBuilder.Entity("FuscaFilmes.Domain.Entities.Filme", b =>
                 {
-                    b.HasOne("FuscaFilmes.API.Entities.Diretor", "Diretor")
+                    b.HasOne("FuscaFilmes.Domain.Entities.Diretor", "Diretor")
                         .WithMany("Filmes")
                         .HasForeignKey("DiretorId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -228,7 +228,7 @@ namespace FuscaFilmes.API.Migrations
                     b.Navigation("Diretor");
                 });
 
-            modelBuilder.Entity("FuscaFilmes.API.Entities.Diretor", b =>
+            modelBuilder.Entity("FuscaFilmes.Domain.Entities.Diretor", b =>
                 {
                     b.Navigation("Filmes");
                 });

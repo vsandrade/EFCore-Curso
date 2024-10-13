@@ -1,5 +1,4 @@
-using System;
-using FuscaFilmes.API.Entities;
+using FuscaFilmes.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace FuscaFilmes.API.DbContexts;
