@@ -10,7 +10,7 @@ public class FilmesHandlers
   public static IEnumerable<Filme> GetFilmes(Context context)
   {
     return context.Filmes
-            .Include(filme => filme.Diretor)
+            .Include(filme => filme.Diretores)
             //.OrderBy(filme => filme.Ano)
             .OrderByDescending(filme => filme.Ano)
             //.ThenBy(filme => filme.Titulo)
@@ -22,7 +22,7 @@ public class FilmesHandlers
   {
     return context.Filmes
             .Where(filme => filme.Id == id)
-            .Include(filme => filme.Diretor).ToList();
+            .Include(filme => filme.Diretores).ToList();
   }
 
   public static IEnumerable<Filme> GetFilmeEFFUnctionsByTitulo(string titulo, Context context)
@@ -31,14 +31,14 @@ public class FilmesHandlers
             .Where(filme =>
                 EF.Functions.Like(filme.Titulo, $"%{titulo}%")
             )
-            .Include(filme => filme.Diretor).ToList();
+            .Include(filme => filme.Diretores).ToList();
   }
 
   public static IEnumerable<Filme> GetFilmesContainsbyTitulo(string titulo, Context context)
   {
     return context.Filmes
             .Where(filme => filme.Titulo.Contains(titulo))
-            .Include(filme => filme.Diretor).ToList();
+            .Include(filme => filme.Diretores).ToList();
   }
 
   public static void ExecuteDeleteFilme(Context context, int filmeId)
