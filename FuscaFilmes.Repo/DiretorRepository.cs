@@ -10,43 +10,43 @@ public class DiretorRepository(Context _context) : IDiretorRepository
 {
   public Context Context { get; } = _context;
 
-  public IEnumerable<Diretor> GetDiretores()
+  public async Task<IEnumerable<Diretor>> GetDiretoresAsync()
   {
-    return Context.Diretores.Include(diretor => diretor.Filmes).ToList();
+    return await Context.Diretores.Include(diretor => diretor.Filmes).ToListAsync();
   }
 
-  public Diretor GetDiretorByName(string name)
+  public async Task<Diretor> GetDiretorByNameAsync(string name)
   {
-    return Context.Diretores
+    return await Context.Diretores
             .Include(diretor => diretor.Filmes)
-            .FirstOrDefault(diretor => diretor.Name.Contains(name))
+            .FirstOrDefaultAsync(diretor => diretor.Name.Contains(name))
             ?? new Diretor { Id = 5555, Name = "Marina" };
   }
 
-  public IEnumerable<Diretor> GetDiretoresById(int id)
+  public async Task<IEnumerable<Diretor>> GetDiretoresByIdAsync(int id)
   {
-    return Context.Diretores
+    return await Context.Diretores
             .Include(diretor => diretor.Filmes)
             .Where(diretor => diretor.Id == id)
-            .ToList();
+            .ToListAsync();
   }
 
-  public void Add(Diretor diretor)
+  public async Task AddAsync(Diretor diretor)
   {
-    Context.Diretores.Add(diretor);
+    await Context.Diretores.AddAsync(diretor);
   }
 
-  public void Delete(int diretorId)
+  public async Task DeleteAsync(int diretorId)
   {
-    var diretor = Context.Diretores.Find(diretorId);
+    var diretor = await Context.Diretores.FindAsync(diretorId);
 
     if (diretor != null)
       Context.Diretores.Remove(diretor);
   }
 
-  public void Update(Diretor diretorNovo)
+  public async Task UpdateAsync(Diretor diretorNovo)
   {
-    var diretor = Context.Diretores.Find(diretorNovo.Id);
+    var diretor = await Context.Diretores.FindAsync(diretorNovo.Id);
 
     if (diretor != null)
     {
@@ -62,8 +62,8 @@ public class DiretorRepository(Context _context) : IDiretorRepository
     }
   }
 
-  public bool SaveChanges()
+  public async Task<bool> SaveChangesAsync()
   {
-    return Context.SaveChanges() > 0;
+    return (await Context.SaveChangesAsync()) > 0;
   }
 }
